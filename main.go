@@ -4,10 +4,10 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/JuanEQuicenoQ/Desarrollo-Final/go-web-server/controllers"
-	"github.com/camilocorreaUdeA/go-web-server/handlers"
-	"github.com/camilocorreaUdeA/go-web-server/models"
-	repositorio "github.com/camilocorreaUdeA/go-web-server/repository" /* importando el paquete de repositorio */
+	"github.com/JuanEQuicenoQ/Desarrollo-Final/controllers"
+	"github.com/JuanEQuicenoQ/Desarrollo-Final/handlers"
+	"github.com/JuanEQuicenoQ/Desarrollo-Final/models"
+	repositorio "github.com/JuanEQuicenoQ/Desarrollo-Final/repository" /* importando el paquete de repositorio */
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
@@ -39,9 +39,9 @@ func main() {
 
 	/* creando una instancia del tipo Repository del paquete repository
 	se debe especificar el tipo de struct que va a manejar la base de datos
-	para este ejemplo es Amigo y se le pasa como parámetro el objeto de
+	se le pasa como parámetro el objeto de
 	conexión a PostgreSQL */
-	repo, err := repositorio.NewRepository[models.Amigo](db)
+	repo, err := repositorio.NewRepository[models.Libro](db)
 	if err != nil {
 		log.Fatalln("fallo al crear una instancia de repositorio", err.Error())
 		return
@@ -63,11 +63,11 @@ func main() {
 	router := mux.NewRouter()
 
 	/* rutas a los endpoints de la API */
-	router.Handle("/amigos", http.HandlerFunc(handler.LeerAmigos)).Methods(http.MethodGet)
-	router.Handle("/amigos", http.HandlerFunc(handler.CrearAmigo)).Methods(http.MethodPost)
-	router.Handle("/amigos/{id}", http.HandlerFunc(handler.LeerUnAmigo)).Methods(http.MethodGet)
-	router.Handle("/amigos/{id}", http.HandlerFunc(handler.ActualizarUnAmigo)).Methods(http.MethodPatch)
-	router.Handle("/amigos/{id}", http.HandlerFunc(handler.EliminarUnAmigo)).Methods(http.MethodDelete)
+	router.Handle("/libros", http.HandlerFunc(handler.LeerLibros)).Methods(http.MethodGet)
+	router.Handle("/libros", http.HandlerFunc(handler.CrearLibro)).Methods(http.MethodPost)
+	router.Handle("/libros/{id}", http.HandlerFunc(handler.LeerUnLibro)).Methods(http.MethodGet)
+	router.Handle("/libros/{id}", http.HandlerFunc(handler.ActualizarUnLibro)).Methods(http.MethodPatch)
+	router.Handle("/libros/{id}", http.HandlerFunc(handler.EliminarUnLibro)).Methods(http.MethodDelete)
 
 	/* servidor escuchando en localhost por el puerto 8080 y entrutando las peticiones con el router */
 	http.ListenAndServe(":8080", router)
