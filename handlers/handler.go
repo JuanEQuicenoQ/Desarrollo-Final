@@ -85,22 +85,22 @@ func (h *Handler) LeerLibros(writer http.ResponseWriter, req *http.Request) {
 	writer.Write(Libros)
 }
 
-func (h *Handler) CrearLibro(writer http.ResponseWriter, req *http.Request) {
-	body, err := io.ReadAll(req.Body)
+func (h *Handler) CrearLibro(w http.ResponseWriter, r *http.Request) {
+	// Leer el cuerpo de la solicitud
+	body, err := io.ReadAll(r.Body)
 	if err != nil {
-		log.Printf("fallo al crear un nuevo libro, con error: %s", err.Error())
-		http.Error(writer, "fallo al crear un nuevo libro", http.StatusBadRequest)
+		http.Error(w, "Error al leer el cuerpo de la solicitud", http.StatusInternalServerError)
 		return
 	}
-	defer req.Body.Close()
 
+	// Llamar a la función del controlador para crear un libro
 	nuevoId, err := h.controller.CrearLibro(body)
 	if err != nil {
-		log.Println("fallo al crear un nuevo Libro, con error:", err.Error())
-		http.Error(writer, "fallo al crear un nuevo libro", http.StatusInternalServerError)
+		http.Error(w, "Error al crear el libro", http.StatusInternalServerError)
 		return
 	}
 
-	writer.WriteHeader(http.StatusCreated)
-	writer.Write([]byte(fmt.Sprintf("id nuevo libro: %d", nuevoId)))
+	// Devolver la respuesta al cliente
+	w.WriteHeader(http.StatusCreated)
+	fmt.Fprintf(w, "Libro creado con ID: %d", nuevoId)
 }

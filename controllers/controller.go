@@ -14,9 +14,9 @@ import (
 var (
 	updateQuery = "UPDATE libros SET %s WHERE id=:id;"
 	deleteQuery = "DELETE FROM libros WHERE id=$1;"
-	selectQuery = "SELECT id, titulo, autor, edicion, pais, publicaciones, BestSeller FROM libros WHERE id=$1;"
-	listQuery   = "SELECT id, titulo, autor, edicion, pais, publicaciones, BestSeller FROM libros limit $1 offset $2"
-	createQuery = "INSERT INTO libros ( titulo, autor, edicion, pais, publicaciones, BestSeller) VALUES (:titulo, :autor, :edicion, :pais, :publicaciones, :BestSeller) returning id;"
+	selectQuery = "SELECT id, titulo, autor, edicion, pais, publicacion, BestSeller FROM libros WHERE id=$1;"
+	listQuery   = "SELECT id, titulo, autor, edicion, pais, publicacion, BestSeller FROM libros limit $1 offset $2"
+	createQuery = "INSERT INTO libros ( titulo, autor, edicion, pais, publicacion, BestSeller) VALUES (:titulo, :autor, :edicion, :pais, :publicacion, :BestSeller) returning id;"
 )
 
 type Controller struct {
@@ -112,12 +112,12 @@ func (c *Controller) CrearLibro(reqBody []byte) (int64, error) {
 	}
 
 	valoresColumnasNuevoLibro := map[string]any{
-		"titulo":        nuevoLibro.Titulo,
-		"autor":         nuevoLibro.Autor,
-		"edicion":       nuevoLibro.Edicion,
-		"pais":          nuevoLibro.Pais,
-		"publicaciones": nuevoLibro.Publicacion,
-		"BestSeller":    nuevoLibro.BestSeller,
+		"titulo":      nuevoLibro.Titulo,
+		"autor":       nuevoLibro.Autor,
+		"edicion":     nuevoLibro.Edicion,
+		"pais":        nuevoLibro.Pais,
+		"publicacion": nuevoLibro.Publicacion,
+		"BestSeller":  nuevoLibro.BestSeller,
 	}
 
 	nuevoId, err := c.repo.Create(context.TODO(), createQuery, valoresColumnasNuevoLibro)

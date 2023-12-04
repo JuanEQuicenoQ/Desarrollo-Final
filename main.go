@@ -31,7 +31,7 @@ func ConectarDB(url, driver string) (*sqlx.DB, error) {
 
 func main() {
 	/* creando un objeto de conexión a PostgreSQL */
-	db, err := ConectarDB("aquí_va_la_URL_de_conexión_de_tu_instancia_de_PostgreSQL", "postgres")
+	db, err := ConectarDB("postgres://rdsbcqik:24AR6Ji_JD5czCO7SFTbr4akyj85WdVK@batyr.db.elephantsql.com/rdsbcqik", "postgres")
 	if err != nil {
 		log.Fatalln("error conectando a la base de datos", err.Error())
 		return

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuscaTuLibro</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://kit.fontawesome.com/34d3836add.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Livvic:wght@100;200;400;500;700&family=Poppins:wght@200;300&family=Quicksand:wght@300;500;700&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        header{
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            align-items: center;
+            padding: 0 20px 0 20px;
+            border-radius: 0 0 5px 5px;
+            background-color: #dfdfdfb2;
+            margin-bottom: 20px;
+            color: #2ab200;
+        }
+        .logo{
+            display: flex;
+            gap: 30px;
+            transition: all 0.3s ease 0s;
+        }
+        .logo h2{
+            display: none;
+        }
+        .logo h2{
+            transition: all 0.6s ease 0s;
+        }
+        .logo i{
+            font-size: 30px;
+            transition: all 0.3s ease 0s;
+        }
+        .logo:hover h2{
+            display: block;
+        }
+        .logo:hover i{
+            scale: 1.2;
+            filter: blur(2px);
+            cursor: pointer;
+        }
+        main{
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #add_book{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            margin-bottom: 30px;
+        }
+        input{
+            border: 1px solid #dfdfdfb2;
+            border-radius: 5px;
+            padding-left: 10px;
+        }
+        .button{
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            margin: 30px 0 10px 0;
+            border-radius: 5px;
+            transition: all 0.3s ease 0s;
+            border: 1px solid #dfdfdfb2;
+        }
+        .button:hover{
+            color: #2ab200;
+            border: 1px solid #2ab200;
+            cursor: pointer;
+        }
+        .data{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 10px;
+        }
+        .radio{
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+        }
+        .radio input{
+            cursor: pointer;
+        }
+        .line{
+            border: 3px solid #dfdfdfb2;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        #search_book{
+            width: 100%;
+        }
+        #search_cnt{
+            width: 100%;
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            height: 30px;
+        }
+        #search_cnt input{
+            width: 100%;
+        }
+        .books_list{
+            position: absolute;
+            border: 1px solid #dfdfdfb2;
+            top: 53px;
+            width: 100%;
+            border-radius: 0 0 5px 5px;
+            border-top: none;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-book-open"></i>
+            <h2>Un mundo de conocimiento</h2>
+        </div>
+        <div class="search_urlogo_title">
+            <h1>BuscaTuLibro.com</h1>
+        </div>
+    </header>
+    <main>
+        <h3>Agregar Libro</h3>
+        <form id="formularioLibro">
+            <div id="add_book">
+                <div class="data">
+                    <label for="title_input">Titulo</label>
+                    <input id="title_input" type="text">
+                </div>
+                <div class="data">
+                    <label for="author_input">Autor</label>
+                    <input id="author_input" type="text">
+                </div>
+                <div class="data">
+                    <label for="edition_input">Edición</label>
+                    <input id="edition_input" type="number">
+                </div>
+                <div class="data">
+                    <label for="country_input">País de publicación</label>
+                    <input id="country_input" type="text">
+                </div>
+                <div class="data">
+                    <label for="date_input">Fecha de publicación</label>
+                    <input id="date_input" type="number">
+                </div>
+                <div class="data radio">
+                    <label for="best_seller_input_yes">Best Seller</label>
+                    <input id="best_seller_input_yes" type="radio" name="boolean" value="true">
+                    <label for="best_seller_input_no">No Best Seller</label>
+                    <input id="best_seller_input_no" type="radio" name="boolean" value="false">
+                </div>
+                <button type="button" class="data button" onclick="enviarFormulario()"><span>Agregar</span></button>
+            </div>
+        </form>
+        <div class="line"></div>
+
+        </div>
+        <h3>Buscar Libro</h3>
+        <div id="search_book">
+            
+            <div id="search_cnt">
+                <label for="search_input">Buscar por titulo</label>
+                <input id="search_input" type="text">
+                <div class="books_list">
+                    <ul>
+                        <li class="libro"><span>Libro 1</span></li
+                        
+                    </ul>
+                </div>
+            </div>
+            <div id="information_book">
+                <div class="data">
+                    <span>libro</span>
+                </div>
+                <div class="data"></div>
+                <div class="data"></div>
+                <div class="data"></div>
+                <div class="data"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function enviarFormulario() {
+            var formData = {
+                titulo: $("#title_input").val(),
+                autor: $("#author_input").val(),
+                edicion: $("#edition_input").val(),
+                pais: $("#country_input").val(),
+                publicaciones: $("#date_input").val(),
+                BestSeller: $("input[name='boolean']:checked").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/libros",
+                contentType: "application/json",
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    alert("Libro agregado con éxito");
+                },
+                error: function(error) {
+                    alert("Error al agregar el libro");
+                    console.error(error);
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
