@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuscaTuLibro</title>
+    <script src="https://kit.fontawesome.com/34d3836add.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Livvic:wght@100;200;400;500;700&family=Poppins:wght@200;300&family=Quicksand:wght@300;500;700&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        header{
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            align-items: center;
+            padding: 0 20px 0 20px;
+            border-radius: 0 0 5px 5px;
+            background-color: #dfdfdfb2;
+            margin-bottom: 20px;
+            
+        }
+        .logo{
+            display: flex;
+            gap: 30px;
+            transition: all 0.3s ease 0s;
+            align-items: center;
+        }
+        .logo h2{
+            
+            filter: blur(3px);
+        }
+        .logo h2{
+            transition: all 0.6s ease 0s;
+            cursor: pointer;
+        }
+        .logo img{
+            width: 90px;
+            transition: all 0.3s ease 0s;
+        }
+        .logo:hover h2{
+            scale: 1.2;
+            filter: blur(0);
+            transform: translateX(30px);
+            
+        }
+        .logo:hover img{
+            scale: 1.2;
+            filter: blur(2px);
+            cursor: pointer;
+        }
+        main{
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #add_book{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            margin-bottom: 30px;
+        }
+        input{
+            border: 1px solid #dfdfdfb2;
+            border-radius: 5px;
+            padding-left: 10px;
+        }
+        .button{
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            margin: 30px 0 10px 0;
+            border-radius: 5px;
+            transition: all 0.3s ease 0s;
+            border: 1px solid #dfdfdfb2;
+        }
+        .button:hover{
+            color: #2ab200;
+            border: 1px solid #2ab200;
+            cursor: pointer;
+        }
+        .data{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 10px;
+        }
+        .radio{
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+        }
+        .radio input{
+            cursor: pointer;
+        }
+        .line{
+            border: 3px solid #2ab200;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        #search_book{
+            width: 100%;
+        }
+        #search_cnt{
+            width: 100%;
+            display: flex;
+            
+            gap: 15px;
+            height: 30px;
+            margin-bottom: 40px;
+        }
+        #search_cnt_inputs{
+            position: relative;
+            width: 100%;
+        }
+        #search_cnt_inputs li{
+            cursor: pointer;
+        }
+        #search_cnt input{
+            width: 100%;
+            
+        }
+        #search_button{
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 120px;
+            border: 1px solid #dfdfdfb2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #search_button:hover{
+            color: #2ab200;
+            border: 1px solid #2ab200;
+        }
+        .books_list{
+            position: absolute;
+            border: 1px solid #dfdfdfb2;
+            top: 30px;
+            width: 100%;
+            border-radius: 0 0 5px 5px;
+            border-top: none;
+            padding-left: 10px;
+        }
+        #information_book{
+            margin-bottom: 60px;
+        }
+        h4{
+            margin-bottom: 10px;
+        }
+        .title_search{
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        #title_input_search{
+            background-color: #dfdfdfb2;;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="src/icon.png" alt="logo">
+            <h2>Un mundo de conocimiento</h2>
+        </div>
+        <div class="search_urlogo_title">
+            <h1>BuscaTuLibro.com</h1>
+        </div>
+    </header>
+    <main>
+        <h3>Agregar Libro</h3>
+        <div id="add_book">
+            <div class="data">
+                <label for="title_input">Titulo</label>
+                <input id="title_input" type="text" placeholder="Nombre del libro">
+                
+            </div>
+            <div class="data">
+                <label for="author_input">Autor</label>
+                <input id="author_input" type="text" placeholder="Nombre del autor">
+                
+            </div>
+            <div class="data">
+                <label for="edition_input">Edición</label>
+                <input id="edition_input" type="number" placeholder="Número de la edición">
+                
+            </div>
+            <div class="data">
+                <label for="country_input">País de publicación</label>
+                <input id="country_input" type="bool" placeholder="País de publicación">
+                
+            </div>
+            <div class="data">
+                <label for="date_input">Fecha de publicación</label>
+                <input id="date_input" type="number" placeholder="Fecha de publicación DDMMAA">
+                
+            </div>
+            <div class="data radio" >
+                <label for="best_seller_input_yes">Best Seller</label>
+                <input id="best_seller_input_yes" type="radio" name="boolean">
+                <label for="best_seller_input_no">No Best Seller</label>
+                <input id="best_seller_input_no" type="radio" name="boolean">
+                
+            </div>
+            <button class="data button"><span>Agregar</span></button>
+        </div>
+        <div class="line">
+
+        </div>
+        <div class="title_search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <h3>Buscar Libro por Título</h3>
+        </div>
+        
+        <div id="search_book">
+            <div id="search_cnt">
+                <div id="search_cnt_inputs">
+                    <input id="search_input" type="text">
+                    <div class="books_list">
+                        <ul>
+                            <li class="libro"><span>Libro 1</span></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <button id="search_button"><span>Buscar</span></button>
+            </div>
+            <h4>Datos del libro</h4>
+            <div id="information_book">
+                <div class="data">
+                    <label for="title_input_search">Titulo</label>
+                    <input readonly id="title_input_search" type="text" placeholder="Nombre del libro">
+                    
+                </div>
+                <div class="data">
+                    <label for="author_input_search">Autor</label>
+                    <input id="author_input_search" type="text" placeholder="Nombre del autor">
+                    
+                </div>
+                <div class="data">
+                    <label for="edition_input_search">Edición</label>
+                    <input id="edition_input_search" type="number" placeholder="Número de la edición">
+                    
+                </div>
+                <div class="data">
+                    <label for="country_input_search">País de publicación</label>
+                    <input id="country_input_search" type="bool" placeholder="País de publicación">
+                    
+                </div>
+                <div class="data">
+                    <label for="date_input_search">Fecha de publicación</label>
+                    <input id="date_input_search" type="number" placeholder="Fecha de publicación DDMMAA">
+                    
+                </div>
+                <div class="data radio" >
+                    <label for="best_seller_input_yes_search">Best Seller</label>
+                    <input id="best_seller_input_yes_search" type="radio" name="boolean">
+                    <label for="best_seller_input_no_search">No Best Seller</label>
+                    <input id="best_seller_input_no_search" type="radio" name="boolean">
+                    
+                </div>
+                
+                <button class="data button" id="save"><span>Guardar</span></button>
+                <button class="data button" id="delete"><span>Eliminar</span></button>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
