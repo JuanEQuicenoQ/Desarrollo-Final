@@ -69,7 +69,7 @@ func main() {
 	router.Handle("/libros/{id}", http.HandlerFunc(handler.ActualizarUnLibro)).Methods(http.MethodPatch)
 	router.Handle("/libros/{id}", http.HandlerFunc(handler.EliminarUnLibro)).Methods(http.MethodDelete)
 
-	fs := http.FileServer(http.Dir("./templates"))
+	fs := http.FileServer(http.Dir("./templates/index.html"))
 	http.Handle("/", fs)
 
 	/* servidor escuchando en localhost por el puerto 8080 y entrutando las peticiones con el router */
