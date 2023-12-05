@@ -167,6 +167,9 @@
             border-radius: 0 0 5px 5px;
             border-top: none;
             padding-left: 10px;
+            z-index: 10;
+            background-color: white;
+            display: none;
         }
         #information_book{
             margin-bottom: 60px;
@@ -182,6 +185,25 @@
         }
         #title_input_search{
             background-color: #dfdfdfb2;;
+        }
+        .books_list ul{
+            background-color: white;
+        }
+        .books_list ul li{
+            cursor: pointer;
+            width: 100%;
+        }
+        .books_list ul span{
+            width: 100%;
+        }
+        .books_list ul li:hover{
+            background-color: #dfdfdfb2;
+        }
+        #search_book{
+            z-index: 4;
+        }
+        h4{
+            z-index: 4;
         }
     </style>
 </head>
@@ -237,7 +259,7 @@
         </div>
         <div class="title_search">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <h3>Buscar Libro por Título</h3>
+            <h3>Buscar Libro por id</h3>
         </div>
         
         <div id="search_book">
@@ -246,8 +268,6 @@
                     <input id="search_input" type="text">
                     <div class="books_list">
                         <ul>
-                            <li class="libro"><span>Libro 1</span></li>
-                            
                         </ul>
                     </div>
                 </div>

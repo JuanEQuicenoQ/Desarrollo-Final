@@ -10,8 +10,9 @@ const countryInput = document.getElementById("country_input_search");
 const dateInput = document.getElementById("date_input_search");
 const bestSellerYesInput = document.getElementById("best_seller_input_yes_search");
 const bestSellerNoInput = document.getElementById("best_seller_input_no_search");
+const books_list= document.querySelector(".books_list");
 
-// Event listener para buscar libro
+// Buscar Libro
 searchButton.addEventListener("click", async () => {
     try {
         // Realiza la solicitud a la API principal para obtener información del libro
@@ -19,44 +20,44 @@ searchButton.addEventListener("click", async () => {
             `http://localhost:8080/libros/${searchInput.value}`
         );
 
-        // Cargar datos del libro
+        // Cargar Datos Libro
         titleInput.value = response.data["titulo"];
         authorInput.value = response.data["autor"];
         editionInput.value = response.data["edicion"];
         countryInput.value = response.data["pais"];
-        dateInput.value = response.data["fechaPublicacion"];
-        bestSellerYesInput.checked = response.data["bestSeller"] === true;
-        bestSellerNoInput.checked = response.data["bestSeller"] === false;
+        dateInput.value = response.data["publicacion"];
+        bestSellerYesInput.checked = response.data["bestseller"] === true;
+        bestSellerNoInput.checked = response.data["bestseller"] === false;
 
         window.alert("Se cargaron correctamente los datos del libro");
     } catch (error) {
-        // Manejo de errores
+        
         window.alert("Error al buscar el libro, es posible que ese ID no exista");
     }
 });
 
-// Event listener para agregar libro
+// Agregar Libros
 addBookButton.addEventListener("click", async () => {
     try {
-        // Obtener valores de los campos de entrada
+        // Campos de Entrada
         const title = document.getElementById("title_input").value;
         const author = document.getElementById("author_input").value;
-        const edition = document.getElementById("edition_input").value;
+        const edition = parseInt(document.getElementById("edition_input").value);
         const country = document.getElementById("country_input").value;
-        const date = document.getElementById("date_input").value;
+        const date = parseInt(document.getElementById("date_input").value);
         const bestSeller = document.querySelector(".radio input[name='boolean']:checked").value === "on";
 
-        // Objeto con la información del libro
+        // Información del Libro
         const bookData = {
             titulo: title,
             autor: author,
             edicion: edition,
             pais: country,
-            fechaPublicacion: date,
-            bestSeller: bestSeller,
+            publicacion: date,
+            bestseller: bestSeller,
         };
 
-        // Realiza la solicitud a la API principal para agregar el libro
+        
         const response = await axios.post(
             `http://localhost:8080/libros`,
             bookData
@@ -64,30 +65,71 @@ addBookButton.addEventListener("click", async () => {
 
         window.alert("Los datos del libro fueron almacenados correctamente");
     } catch (error) {
-        // Manejo de errores
+        
         window.alert("Error al agregar el libro, verifique los datos e intente nuevamente");
     }
 });
 
-// Event listener para eliminar libro
+// Eliminar Libros
 deleteBookButton.addEventListener("click", async () => {
     try {
-        // Realiza la solicitud a la API principal para eliminar el libro
+        
         const response = await axios.delete(
             `http://localhost:8080/libros/${searchInput.value}`
         );
 
         window.alert("Se eliminó el libro de la base de datos correctamente");
     } catch (error) {
-        // Manejo de errores
+        
         window.alert("Error al eliminar el libro, es posible que el ID no sea correcto");
     }
 });
 
-// Event listener para guardar cambios en la información del libro
+var lista=document.querySelector(".books_list ul");
+//Agregar Lista de Libros por id
+async function listar (){
+    try {
+        // Realiza la solicitud a la API principal para obtener información del libro
+        
+        const response = await axios.get(
+            `http://localhost:8080/libros`
+        );
+        
+        console.log(response['data'].length)
+
+        for (let i=0; i<response['data'].length;i++){
+            var list= (response['data'][i]['id'])
+            var li=document.createElement("li");
+            li.classList.add("libro");
+            var span=document.createElement("span");
+            span.textContent=list;
+            li.appendChild(span);
+            lista.appendChild(li);
+            li.addEventListener('click', (e)=>{
+                const item=e.target;
+                searchInput.value=item.querySelector("span").textContent;
+                books_list.style.display="none";
+            })
+            
+        }
+    } catch (error) {
+        
+        window.alert("No se agregó la lista");
+    }
+};
+
+searchInput.addEventListener('click', (e)=>{
+	books_list.style.display="block";
+})
+
+listar();
+
+    
+
+// Actualizar
 saveBookButton.addEventListener("click", async () => {
     try {
-        // Obtener valores actualizados de los campos de entrada
+        
         const updatedTitle = titleInput.value;
         const updatedAuthor = authorInput.value;
         const updatedEdition = editionInput.value;
@@ -95,25 +137,25 @@ saveBookButton.addEventListener("click", async () => {
         const updatedDate = dateInput.value;
         const updatedBestSeller = bestSellerYesInput.checked;
 
-        // Objeto con la información actualizada del libro
+        //Información actualizada del libro
         const updatedBookData = {
             titulo: updatedTitle,
             autor: updatedAuthor,
             edicion: updatedEdition,
             pais: updatedCountry,
-            fechaPublicacion: updatedDate,
-            bestSeller: updatedBestSeller,
+            publicacion: updatedDate,
+            bestseller: updatedBestSeller,
         };
 
-        // Realiza la solicitud a la API principal para actualizar la información del libro
-        const response = await axios.put(
+        
+        const response = await axios.patch(
             `http://localhost:8080/libros/${searchInput.value}`,
             updatedBookData
         );
 
         window.alert("Se guardaron los cambios correctamente");
     } catch (error) {
-        // Manejo de errores
+       
         window.alert("Error al guardar cambios, verifique los datos e intente nuevamente");
     }
 });
