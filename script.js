@@ -62,6 +62,7 @@ addBookButton.addEventListener("click", async () => {
             `http://localhost:8080/libros`,
             bookData
         );
+        listar();
 
         window.alert("Los datos del libro fueron almacenados correctamente");
     } catch (error) {
@@ -87,17 +88,29 @@ deleteBookButton.addEventListener("click", async () => {
     
 });
 
-var lista=document.querySelector(".books_list ul");
-//Agregar Lista de Libros por id
+var cnt=document.querySelector(".books_list");
 async function listar (){
-    try {
+searchInput.value="";
+try {
+	try {
+		var ul= cnt.querySelector("ul");
+		ul.remove();
+	
+	}
+	catch (error) {
+        	console.log("No hay nada");
+    }
+
+	var ul=document.createElement("ul");
+	var lista=cnt.appendChild(ul);
+	
         // Realiza la solicitud a la API principal para obtener información del libro
         
         const response = await axios.get(
-            `http://localhost:8080/libros`
+            'http://localhost:8080/libros'
         );
         
-        console.log(response['data'].length)
+        
 
         for (let i=0; i<response['data'].length;i++){
             var list= (response['data'][i]['id'])
@@ -116,8 +129,7 @@ async function listar (){
         }
     } catch (error) {
         
-        window.alert("No se agregó la lista");
-    }
+        window.alert("No se agregó la lista");}
 };
 
 searchInput.addEventListener('click', (e)=>{
