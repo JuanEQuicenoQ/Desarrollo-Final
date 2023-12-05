@@ -79,10 +79,12 @@ deleteBookButton.addEventListener("click", async () => {
         );
 
         window.alert("Se eliminó el libro de la base de datos correctamente");
+        listar();
     } catch (error) {
         
         window.alert("Error al eliminar el libro, es posible que el ID no sea correcto");
     }
+    
 });
 
 var lista=document.querySelector(".books_list ul");
